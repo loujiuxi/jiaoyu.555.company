@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可瓦少儿美术教育 - 开启孩子的艺术之旅</title>
+    <style>
+        /* --- 全局变量与重置 --- */
+        :root {
+            --bg-color: #FFF8E1; /* 米黄色背景 */
+            --primary-green: #4CAF50; /* 草绿色 */
+            --accent-orange: #FF9800; /* 亮橙色 */
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #FFFFFF;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-green);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- 导航栏 --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-green);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s;
+            border-radius: 20px;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: var(--primary-green);
+            background-color: #E8F5E9;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            padding: 40px 0;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .hero-image {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        /* --- About Section --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            margin-bottom: 20px;
+        }
+
+        /* --- Courses Section --- */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .course-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .tag-green { background-color: var(--primary-green); }
+        .tag-orange { background-color: var(--accent-orange); }
+
+        .course-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .course-meta { font-size: 0.9rem; color: var(--accent-orange); font-weight: bold; margin-bottom: 10px; }
+
+        /* --- Teachers Section --- */
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .teacher-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+
+        .teacher-photo {
+            width: 100%;
+            height: 300px;
+        }
+
+        .teacher-info {
+            padding: 20px;
+        }
+
+        .teacher-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .teacher-title {
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: var(--card-shadow);
+        }
+
+        /* --- Contact Section --- */
+        .contact-wrapper {
+            display: flex;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            align-items: stretch;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--primary-green), #81C784);
+            color: var(--white);
+        }
+
+        .contact-info h2, .contact-info p { color: var(--white); }
+        .contact-info .section-title::after { background: var(--white); }
+
+        .contact-form {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .contact-methods {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #333;
+            color: #ccc;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
+        }
+
+        /* --- 响应式适配 --- */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-content { padding-right: 0; margin-bottom: 40px; }
+            .hero h1 { font-size: 2.2rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .contact-wrapper { flex-direction: column; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            .nav-links {
+                display: none; /* 简化移动端导航，实际项目可加汉堡菜单 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">可瓦少儿美术</div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">首页</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#courses">课程体系</a></li>
+                    <li><a href="#teachers">名师团队</a></li>
+                    <li><a href="#gallery">学员风采</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 2. Hero 区域 -->
+    <section id="home" class="hero section">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="hero-content">
+                <h1>开启孩子的艺术之旅</h1>
+                <p class="subtitle">专业美术教育，培养创造力与审美能力
+                <a href="#courses" class="btn">立即了解 ></a>
+            </div>
+            <div class="hero-image">
+                <!-- 使用免版权图片：儿童绘画 -->
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="儿童绘画">
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 关于我们 -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">关于我们</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>机构简介</h2>
+                    可瓦少儿美术教育成立于20XX年，是一家专注于3-16岁少儿美术教育的专业机构。我们秉承"以美育人，以艺启智"的教育理念，致力于培养孩子的艺术素养和创造力。
+                    <h2 style="margin-top: 30px;">教育理念</h2>
+                    我们相信每个孩子都是天生的艺术家。通过专业的美术教育，激发孩子的创造潜能，培养审美能力，让孩子在艺术的世界里自由翱翔。
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1504610926078-a1611febcad3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="关于我们">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 课程体系 -->
+    <section id="courses" class="section" style="background: #FFF3E0;">
+        <div class="container">
+            <h2 class="section-title">课程体系</h2>
+            <div class="courses-grid">
+                <!-- 卡片 1 -->
+                <div class="course-card">
+                    <span class="course-tag tag-green">创意涂鸦班</span>
+                    <h3>适合年龄：3-5岁</h3>
+                    <div class="course-meta">课程内容</div>
+                    色彩认知、线条练习、简单造型、创意涂鸦
+                    <div class="course-meta">培养目标</div>
+                    培养色彩感知能力，锻炼手眼协调，激发绘画兴趣
+                </div>
+                <!-- 卡片 2 -->
+                <div class="course-card">
+                    <span class="course-tag tag-green">基础绘画班</span>
+                    <h3>适合年龄：6-8岁</h3>
+                    <div class="course-meta">课程内容</div>
+                    素描基础、水彩画、油画棒、创意手工
+                    <div class="course-meta">培养目标</div>
+                    掌握基本绘画技巧，培养观察能力和表现力
+                </div>
+                <!-- 卡片 3 -->
+                <div class="course-card">
+                    <span class="course-tag tag-green">专业提升班</span>
+                    <h3>适合年龄：9-12岁</h3>
+                    <div class="course-meta">课程内容</div>
+                    素描、色彩、速写、创作
+                    <div class="course-meta">培养目标</div>
+                    提升专业技能，培养艺术思维
+                </div>
+                <!-- 卡片 4 -->
+                <div class="course-card">
+                    <span class="course-tag tag-orange">艺考预备班</span>
+                    <h3>适合年龄：13-16岁</h3>
+                    <div class="course-meta">课程内容</div>
+                    素描、色彩、速写、设计基础
+                    <div class="course-meta">培养目标</div>
+                    为艺术类中考、高考做准备
+                </div>
+                <!-- 卡片 5 -->
+                <div class="course-card">
+                    <span class="course-tag tag-orange">特色工作坊</span>
+                    <h3>适合年龄：6岁以上</h3>
+                    <div class="course-meta">课程内容</div>
+                    国画、书法、陶艺、版画、动漫
+                    <div class="course-meta">培养目标</div>
+                    体验不同艺术形式，拓展艺术视野
+                </div>
+                <!-- 卡片 6 -->
+                <div class="course-card">
+                    <span class="course-tag tag-orange">户外写生课</span>
+                    <h3>适合年龄：12岁以上</h3>
+                    <div class="course-meta">课程内容</div>
+                    风景写生、人物速写、自然观察
+                    <div class="course-meta">培养目标</div>
+                    观察自然，感受生活，提升写生能力
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 名师团队 -->
+    <section id="teachers" class="section">
+        <div class="container">
+            <h2 class="section-title">名师团队</h2>
+            <div class="teachers-grid">
+                <!-- 老师 1 -->
+                <div class="teacher-card">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="教学总监" class="teacher-photo">
+                    <div class="teacher-info">
+                        <div class="teacher-name">教学总监 - 张小可</div>
+                        <div class="teacher-title">可瓦美术学院硕士</div>
+                        <strong>教学经验：</strong>15年少儿美术教学经验
+                        <strong>教育专长：</strong>创意美术、儿童心理学
+                        <strong>教学成就：</strong>指导学员获国家级奖项200余项
+                    </div>
+                </div>
+                <!-- 老师 2 -->
+                <div class="teacher-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="骨干教师" class="teacher-photo">
+                    <div class="teacher-info">
+                        <div class="teacher-name">骨干教师 - 李小画</div>
+                        <div class="teacher-title">可瓦美术学院硕士</div>
+                        <strong>教学经验：</strong>10年少儿美术教学经验
+                        <strong>教育专长：</strong>水彩画、创意手工
+                        <strong>教学成就：</strong>研发多套创意美术课程
+                    </div>
+                </div>
+                <!-- 老师 3 -->
+                <div class="teacher-card">
+                    <img src="https://images.unsplash.com/photo-1556157382-97eda2f9e946?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="骨干教师" class="teacher-photo">
+                    <div class="teacher-info">
+                        <div class="teacher-name">骨干教师 - 王艺涵</div>
+                        <div class="teacher-title">可瓦美术学院硕士</div>
+                        <strong>教学经验：</strong>8年少儿美术教学经验
+                        <strong>教育专长：</strong>素描、色彩、艺考辅导
+                        <strong>教学成就：</strong>培养众多学员考入重点艺术院校
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 学员风采 -->
+    <section id="gallery" class="section" style="background: #F1F8E9;">
+        <div class="container">
+            <h2 class="section-title">学员风采</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="学员作品1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="学员作品2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1532635241-17e820acc59f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="学员作品3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 联系我们 -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>CONTACT US</h2>
+                    如果您有任何疑问，欢迎随时联系我们。我们期待与您一起开启孩子的艺术之旅！
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <span style="font-size: 1.5rem;">📞</span>
+                            <span>电话：001-12345678 / 13066668888</span>
+                        </div>
+                        <div class="contact-method">
+                            <span style="font-size: 1.5rem;">✉️</span>
+                            <span>邮箱：cnsupport@canva.com</span>
+                        </div>
+                        <div class="contact-method">
+                            <span style="font-size: 1.5rem;">📍</span>
+                            <span>地址：深圳市南山区金色商业街001号</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>预约试听课</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="联系电话" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="5" placeholder="留言内容"></textarea>
+                        </div>
+                        <button type="submit" class="btn">提交预约</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. 页脚 -->
+    <footer>
+        <div class="container">
+            © 2023 可瓦少儿美术教育 版权所有
+        </div>
+    </footer>
+
+</body>
+</html>
